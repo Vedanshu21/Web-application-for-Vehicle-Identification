@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}
+Search
+{% endblock title %}
+
+
+
+{% block body %}
+ <h3 class="text-center"><span>Search Owner's Details</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4">
+
+<form action="/search" method="post">
+
+
+<div class="form-group">
+  <label for="Vehicle_RC_No">Enter Vehicle Plate Number / RC Number</label>
+  <input type="text" class="form-control" name="Vehicle_RC_No" id="Vehicle_RC_No" placeholder="Example - CG04CP1234">
+</div>
+<br>
+
+  <button type="submit" class="btn btn-danger btn-sm btn-block">Search</button>
+</form>
+<br>
+<br>
+
+</div>
+
+
+<div class="col-md-8">
+{% if bio %}
+<br>
+<h3>Details</h3>
+ <hr>
+ 
+ <!-- 
+Identification
+   Driving_License_No
+    FullName
+    Address
+    DoB
+    Mobile_No
+    Valid_Till
+    Vehicle_RC_No
+
+  -->
+
+ <li>RC Number  : {{bio.Vehicle_RC_No}}</li>
+ <li>Full Name   : {{bio.FullName}}</li>
+ <li>Address : {{bio.Address}}</li>
+ <li>Date of Birth   : {{bio.DoB}}</li>
+  <li>Mobile Number: {{bio.Mobile_No}}</li> 
+ <li>Driving License No    : {{bio.Driving_License_No}}</li>
+  <li>DL valid Till Date : {{bio.Valid_Till}}</li>
+
+  
+<br><br>
+{% else %}
+No such results
+{% endif %}
+
+</div>
+</div>
+
+
+
+{% endblock body %}
